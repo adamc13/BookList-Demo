@@ -2,9 +2,9 @@
 Simple demo web application which presents a list of books that users have entered through a form.
 
 ## Features: </br>
-Delete entries <br/>
+Delete entries. <br/>
 Search bar. <br/>
-Sort based on list header (e.g Sort by Title)
+Sort based on list header. (e.g Sort by Title)
 
 ## How to Run: </br>
 Clone or download the repo. <br/>
