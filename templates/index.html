@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+
+    <head>
+        <title>BookList Demo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    </head>
+
+    <body>
+
+        <h1>Django & sqlite3</h1><h3>Sample Application by Adam Chaarawi</h3>
+        <hr />
+
+        <div class="container">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Add New Books</div>
+                <div class="panel-body">
+                <form method="post" id="create-book-form">
+                {% csrf_token  %}
+                    <div class="form-group">
+                        <label for="title">Title:</label>
+                        <input type="text" class="form-control" id="title" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="author">Author:</label>
+                        <input type="text" class="form-control" id="author" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">ISBN:</label>
+                        <input type="text" pattern="[0-9]{13}" class="form-control" id="isbn"/>
+                        <span class="help-block">Optional. Must be 13 digits long.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="url">URL:</label>
+                        <input type="url" class="form-control" id="url" required/>
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Submit"/>
+                </form>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Book List
+                    <input class="form-control pull-right" id="search-input" onkeyup="filter()"
+                            type="text" placeholder="Search by Title">
+                </div>
+
+                <div class="panel-body">
+                <div class="table-responsive-sm">
+                    <table id="list" class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th><button id="s_title" onclick="sortBy(this.id)"
+                                    class="sort-button">Title</button></th>
+                                <th><button id="s_author" onclick="sortBy(this.id)"
+                                    class="sort-button">Author</button></th>
+                                <th><button id="s_isbn" onclick="sortBy(this.id)"
+                                    class="sort-button">ISBN</button></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="list-body">
+                            {% for book in bookSet %}
+                            <tr>
+                                <td><a target="_blank" href="{{ book.url }}">{{ book.title }}</a></td>
+                                <td>{{ book.author }}</td>
+                                <td>{{ book.isbn }}</td>
+                                <td> <form id="delete-book-form" method="post" class="pull-right">
+                                    {% csrf_token %}
+                                    <button id="delete-book" value="{{ book.id }}"
+                                        type="submit" class="delete-btn btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-trash"></span></button>
+                                </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+
+    </body>
+
+</html>

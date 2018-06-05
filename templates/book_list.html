@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+
+{% for book in bookSet %}
+<tr>
+    <td><a target="_blank" href="{{ book.url }}">{{ book.title }}</a></td>
+    <td>{{ book.author }}</td>
+    <td>{{ book.isbn }}</td>
+    <td> <form id="delete-book-form" method="post" class="pull-right">
+        {% csrf_token %}
+        <button id="delete-book" value="{{ book.id }}" style="border: none;"
+            type="submit" class="btn btn-default btn-sm">
+        <span class="glyphicon glyphicon-trash"></span></button>
+    </form>
+    </td>
+</tr>
+{% endfor %}
