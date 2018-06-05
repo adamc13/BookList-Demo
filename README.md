@@ -1,7 +1,8 @@
 # BookList-Demo
-Simple demo web application for adding books to a list.
+Simple demo web application which presents a list of books that users have entered through a form.
 
 ## Features: </br>
+Delete entries <br/>
 Search bar. <br/>
 Sort based on list header (e.g Sort by Title)
 
