@@ -1,5 +1,6 @@
 # Django-Firebase BookList
 
+```bash
 > A Django project
 
 ## Build Setup
